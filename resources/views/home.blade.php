@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{--@extends('layouts.app')--}}
 
 @section('content')
     <div class="container">
@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="col-9 p-5">
-                <h1>Laravel Study Project</h1>
+                <h1>{{ $user->username }}</h1> <?php #Get field 'username' of variable $user, variable was passed in controller ?>
                 <div class="d-flex">
                     <div class="px-3"><strong>153</strong> posts</div>
                     <div class="px-3"><strong>23k</strong> followers</div>
