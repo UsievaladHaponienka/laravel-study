@@ -45,6 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //User-profile relation
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class); //creation relation between user and profile model
@@ -53,6 +54,6 @@ class User extends Authenticatable
     //User-post relation
     public function posts(): HasMany
     {
-        return $this->hasMany(Posts::class); //Assign many posts to one user
+        return $this->hasMany(Posts::class)->orderBy('created_at' , 'DESC'); //Assign many posts to one user
     }
 }
