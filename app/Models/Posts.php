@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Posts extends Model
 {
     //This array defines which fields are allowed to be saved.
     protected $fillable = [
         'caption',
-        'image'
+        'image',
+        'user_id'
     ];
 
     public function user()

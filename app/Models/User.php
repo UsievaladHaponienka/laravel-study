@@ -53,6 +53,6 @@ class User extends Authenticatable
     //User-post relation
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class); //Assign many posts to one user
+        return $this->hasMany(Posts::class); //Assign many posts to one user
     }
 }

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth'); //All actions in this controller will require authentification
+    }
+
     public function create()
     {
         return view('posts.create');
@@ -19,8 +23,17 @@ class PostsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        Post::create($data);
+        /** @var UploadedFile $image */
+        $image = \request('image');
+        $imagePath = $image->store('uploads', 'public'); //Save image. Final path will be /storage/public/uploads
 
-        dd(\request()->all());
+        auth()->user()->posts()->create([         //TODO debug this method
+            'caption' => $data['caption'],
+            'image' => $imagePath,
+        ]);
+
+        return redirect(route('profile.show', auth()->user()->id));
+
+
     }
 }
