@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function profile(): HasOne
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class); //creation relation between user and profile model
     }
 }

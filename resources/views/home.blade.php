@@ -15,9 +15,10 @@
                     <div class="px-3"><strong>23k</strong> followers</div>
                     <div class="px-3"><strong>212</strong> following</div>
                 </div>
-                <div class="pt-4"><strong>usievalad.haponienka@gmail.com</strong></div>
-                <div>PHP developer at ItechArt Group</div>
-                <div><a href="https://github.com/UsievaladHaponienka">My GitHub</a></div>
+                <?php // Dynamic content from profile model now can be used ?>
+                <div class="pt-4"><strong>{{ $user->profile->title }}</strong></div>
+                <div>{{ $user->profile->description }}</div>
+                <div><a href="{{ $user->profile->url }}">{{ $user->profile->url }}</a></div>
             </div>
         </div>
         <div class="row">

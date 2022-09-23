@@ -15,13 +15,13 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->string('title')->nullable();
+            $table->unsignedInteger('user_id'); //create field for foreign key. Unsigned means that value can not be negative
+            $table->string('title')->nullable(); //Create nullable fields
             $table->text('description')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
 
-            $table->index('user_id');
+            $table->index('user_id'); //add index to table
         });
     }
 
