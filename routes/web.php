@@ -22,3 +22,6 @@ Auth::routes();
 
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show') ;
 
+//Added new routes to create and save new post
+Route::get('/p/create', [App\Http\Controllers\PostsController::class, 'create'])->name('post.create') ;
+Route::post('/p', [App\Http\Controllers\PostsController::class, 'store'])->name('post.store') ;

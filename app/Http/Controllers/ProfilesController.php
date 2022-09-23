@@ -12,8 +12,11 @@ class ProfilesController extends Controller
 {
     public function index($userId)
     {
-        $user = User::find($userId); //Search for user in user table by id using App\Models\User model
-        return view('home', [ //Pass an array of arguments to view file. Full view file name is home.blade.php
+        //Search for user in user table by id using App\Models\User model
+        // @findOrFail method returns 404 error if user wasn't found
+        $user = User::findOrFail($userId);
+
+        return view('profile.index', [ //Pass an array of arguments to view file. Full view file name is home.blade.php
             'user' => $user
         ]);
     }
