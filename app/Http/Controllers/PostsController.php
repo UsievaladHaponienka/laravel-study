@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Posts;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
@@ -38,7 +39,10 @@ class PostsController extends Controller
         ]);
 
         return redirect(route('profile.show', auth()->user()->id));
+    }
 
-
+    public function show(Posts $post)
+    {
+        return view('posts.show', compact('post'));
     }
 }

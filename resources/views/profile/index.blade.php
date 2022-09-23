@@ -13,6 +13,7 @@
                     <h1>{{ $user->username }}</h1> <?php #Get field 'username' of variable $user, variable was passed in controller ?>
                     <a href="{{ route('post.create') }}">Add new post</a>
                 </div>
+                <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
                 <div class="d-flex">
                     <div class="px-0"><strong>{{$user->posts->count()}}</strong> posts</div>
                     <div class="px-5"><strong>23k</strong> followers</div>
@@ -27,7 +28,9 @@
         <div class="row pt-5">
             @foreach($user->posts as $post)
                 <div class="col-4 pd-4">
-                    <img class="w-100 h-100 pt-4" src="/storage/{{ $post->image }}">
+                    <a href="/p/{{ $post->id }}">
+                        <img class="w-100 h-100 pt-4" src="/storage/{{ $post->image }}">
+                    </a>
                 </div>
             @endforeach
         </div>
