@@ -17,7 +17,9 @@ class PostsController extends Controller
     {
         $users = auth()->user()->following()->pluck('profiles.user_id'); // Get all user ids
 
-        $posts = Posts::whereIn('user_id', $users)->latest()->get(); // latest equals to orderBy('created_at', DESC')
+        $posts = Posts::whereIn('user_id', $users)->latest()->paginate(5);
+        // latest equals to orderBy('created_at', 'DESC')
+        // paginate(5) not only allows to get 5 posts, but also allows to user $posts->links to create pagination at view. TODO debug!
 
         return view('posts.index', compact('posts'));
     }

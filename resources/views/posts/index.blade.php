@@ -23,5 +23,10 @@
                 </div>
             </div>
         @endforeach
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                {{ $posts->links() }} <!-- Add pagination links if `paginate` method was called in controller. TODO debug! -->
+            </div>
+        </div>
     </div>
 @endsection
