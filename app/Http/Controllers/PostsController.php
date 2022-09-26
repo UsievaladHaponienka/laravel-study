@@ -20,13 +20,13 @@ class PostsController extends Controller
 
     public function store()
     {
-        $data = \request()->validate([
+        $data = request()->validate([
             'caption' => ['required'],
             'image' => ['required', 'image']
         ]);
 
         /** @var UploadedFile $image */
-        $image = \request('image');
+        $image = request('image');
         $imagePath = $image->store('uploads', 'public'); //Save image. Final path will be /storage/public/uploads
 
         //Resize using Intervention library

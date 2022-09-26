@@ -12,8 +12,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Profile extends Model
 {
-   public function user(): BelongsTo
-   {
-       return $this->belongsTo(User::class); // Creating relation between user and profile model
-   }
+    protected $fillable = [
+        'title',
+        'description',
+        'url',
+        'image'
+    ];
+
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class); // Creating relation between user and profile model
+    }
+
+    public function profileImage(): ?string
+    {
+        $imagePath = ($this->image) ?
+            $this->image :
+            'profile/D9XNtYm33nO7XWmDK429GDkuvDLNoxKyWs6k90Xs.png';
+        return '/storage/' . $imagePath;
+
+    }
 }
