@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 
 class FollowsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(User $user)
     {
         //Assign or de-assign authenticated user to current profile
         //TODO debug
-        return auth()->user()->following()->toggle($user->profile);
+        return auth()->user()->following()->toggle($user->profile->id);
     }
 }

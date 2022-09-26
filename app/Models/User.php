@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,7 +77,7 @@ class User extends Authenticatable
         return $this->hasMany(Posts::class)->orderBy('created_at' , 'DESC'); //Assign many posts to one user
     }
 
-    public function following()
+    public function following(): BelongsToMany //PROFILES that are followed by current USER
     {
         return $this->belongsToMany(Profile::class);
     }

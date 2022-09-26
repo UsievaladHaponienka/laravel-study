@@ -11,7 +11,7 @@
                     <div class="d-flex align-items-center pb-3">
                         <div class="h4">{{ $user->username }}</div> <?php #Get field 'username' of variable $user, variable was passed in controller ?>
 
-                        <follow-button user-id="{{ $user->id }}"></follow-button> <!-- user-id passes argument to component-->
+                        <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button> <!-- user-id passes argument to component-->
                     </div>
                     <!-- Blade directive can. Shows link only if ProfilePolicy method `update1 returns true i.e.
                     user is viewing his own profile -->
@@ -24,8 +24,8 @@
                 @endcan
                 <div class="d-flex">
                     <div class="px-0"><strong>{{$user->posts->count()}}</strong> posts</div>
-                    <div class="px-5"><strong>23k</strong> followers</div>
-                    <div class="px-5 "><strong>212</strong> following</div>
+                    <div class="px-5"><strong>{{ $user->profile->followers->count() }}</strong> followers</div>
+                    <div class="px-5 "><strong>{{ $user->following->count() }}</strong> following</div>
                 </div>
                     <?php // Dynamic content from profile model now can be used ?>
                 <div class="pt-4"><strong>{{ $user->profile->title }}</strong></div>

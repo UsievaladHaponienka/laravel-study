@@ -1,23 +1,41 @@
 <template>
    <div> <!--All code msut be be inside one div -->
-       <button class="btn btn-primary" style="margin-left: 6px" @click="followUser">Follow</button>
+       <button class="btn btn-primary" style="margin-left: 6px" @click="followUser" v-text="buttonText"></button>
    </div>
 </template>
 
 <script>
     export default {
-        props: ['userId'], //Accept arguments
+        props: ['userId', 'follows'], //Accept arguments
 
         mounted() {
             console.log('Component mounted.')
+        },
+
+        data: function () {
+            return {
+                status: this.follows,
+            }
         },
 
         methods: {
             followUser() {
                 axios.post('/follow/' + this.userId)
                     .then(response => {
-                        console.log(response)
+                        this.status = !this.status
+                    })
+                    .catch(errors => {
+                        if (errors.response.status == 401) {
+                            window.location = '/login';
+                        }
                     });
+
+            }
+        },
+
+        computed: {
+            buttonText() {
+                return(this.status) ? 'Unfollow' : 'Follow'
             }
         }
     }

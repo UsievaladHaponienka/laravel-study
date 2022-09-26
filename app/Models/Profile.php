@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * This class was created using command "php artisan make:model -m Profile"
@@ -34,7 +35,7 @@ class Profile extends Model
 
     }
 
-    public function followers()
+    public function followers(): BelongsToMany //USER which follow this PROFILE
     {
         return $this->belongsToMany(User::class);
     }
