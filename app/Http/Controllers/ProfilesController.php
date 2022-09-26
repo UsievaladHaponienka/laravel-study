@@ -15,7 +15,7 @@ class ProfilesController extends Controller
         return view('profile.index', compact('user')); // Using compact PHP function to pass user to view
     }
 
-    public function edit( User $user)
+    public function edit(User $user)
     {
         $this->authorize('update', $user->profile); //TODO Debug this method
         return view('profile.edit', compact('user'));
@@ -38,12 +38,13 @@ class ProfilesController extends Controller
             $imagePath = request('image')->store('profile', 'public');
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
             $image->save();
+
+            $imageArray = ['image' => $imagePath];
         }
 
         auth()->user()->profile->update(array_merge(
-            $data, [
-                'image' => $imagePath
-            ]
+            $data,
+            $imageArray ?? []
         ));
 
         return redirect("/profile/{$user->id}");

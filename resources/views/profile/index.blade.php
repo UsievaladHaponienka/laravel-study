@@ -8,7 +8,13 @@
             </div>
             <div class="col-9 p-5">
                 <div class="d-flex justify-content-between align-items-baseline">
-                    <h1>{{ $user->username }}</h1> <?php #Get field 'username' of variable $user, variable was passed in controller ?>
+                    <div class="d-flex align-items-center pb-3">
+                        <div class="h4">{{ $user->username }}</div> <?php #Get field 'username' of variable $user, variable was passed in controller ?>
+
+                        <follow-button user-id="{{ $user->id }}"></follow-button> <!-- user-id passes argument to component-->
+                    </div>
+                    <!-- Blade directive can. Shows link only if ProfilePolicy method `update1 returns true i.e.
+                    user is viewing his own profile -->
                     @can('update', $user->profile)
                         <a href="{{ route('post.create') }}">Add new post</a>
                     @endcan

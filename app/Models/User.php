@@ -58,7 +58,7 @@ class User extends Authenticatable
             function($user) {
                 $user->profile()->create(
                     [
-                        'title' => $user->username
+                        'title' => $user->username //Set Username as profile title when new user is created
                     ]
                 );
             });
@@ -74,5 +74,10 @@ class User extends Authenticatable
     public function posts(): HasMany
     {
         return $this->hasMany(Posts::class)->orderBy('created_at' , 'DESC'); //Assign many posts to one user
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 }
