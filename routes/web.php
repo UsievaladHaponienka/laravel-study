@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -27,6 +24,7 @@ Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class,
 //Added new routes to create and save new post
 // Route order matters
 // If /p/{post} route is above /p/create route, p/create wil never work as url "/p/create" matches /p/{post} pattern
+Route::get('/', [App\Http\Controllers\PostsController::class, 'index'])->name('posts.index');
 Route::get('/p/create', [App\Http\Controllers\PostsController::class, 'create'])->name('post.create') ;
 Route::post('/p', [App\Http\Controllers\PostsController::class, 'store'])->name('post.store') ;
 Route::get('/p/{post}', [App\Http\Controllers\PostsController::class, 'show'])->name('post.show') ;

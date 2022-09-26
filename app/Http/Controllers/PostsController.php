@@ -13,6 +13,15 @@ class PostsController extends Controller
         $this->middleware('auth'); //All actions in this controller will require authentication
     }
 
+    public function index()
+    {
+        $users = auth()->user()->following()->pluck('profiles.user_id'); // Get all user ids
+
+        $posts = Posts::whereIn('user_id', $users)->latest()->get(); // latest equals to orderBy('created_at', DESC')
+
+        return view('posts.index', compact('posts'));
+    }
+
     public function create()
     {
         return view('posts.create');
