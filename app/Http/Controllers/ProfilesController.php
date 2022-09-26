@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -13,7 +14,36 @@ class ProfilesController extends Controller
     public function index(User $user) //If arg name is same as in route, Laravel can resolve it and find user
     {
         $follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
-        return view('profile.index', compact('user', 'follows')); // Using compact PHP function to pass user to view
+
+        //Added caching
+        $postCount = Cache::remember(
+            'count.posts.' . $user->id,
+            now()->addSecond(30),
+            function () use ($user) {
+                return $user->posts->count();
+            });
+
+        $followersCount = Cache::remember(
+            'count.followers.' . $user->id,
+            now()->addSecond(30),
+            function () use ($user) {
+                return $user->profile->followers->count();
+            });
+
+        $followingCount = Cache::remember(
+            'count.following.' . $user->id,
+            now()->addSecond(30),
+            function () use ($user) {
+                return $user->following->count();
+            });
+
+        return view('profile.index', compact(
+            'user',
+            'follows',
+            'postCount',
+            'followersCount',
+            'followingCount',
+        )); // Using compact PHP function to pass user to view
     }
 
     public function edit(User $user)

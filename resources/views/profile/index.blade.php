@@ -23,9 +23,9 @@
                     <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
                 @endcan
                 <div class="d-flex">
-                    <div class="px-0"><strong>{{$user->posts->count()}}</strong> posts</div>
-                    <div class="px-5"><strong>{{ $user->profile->followers->count() }}</strong> followers</div>
-                    <div class="px-5 "><strong>{{ $user->following->count() }}</strong> following</div>
+                    <div class="px-0"><strong>{{ $postCount }}</strong> posts</div>
+                    <div class="px-5"><strong>{{ $followersCount }}</strong> followers</div>
+                    <div class="px-5 "><strong>{{ $followingCount }}</strong> following</div>
                 </div>
                     <?php // Dynamic content from profile model now can be used ?>
                 <div class="pt-4"><strong>{{ $user->profile->title }}</strong></div>
