@@ -18,9 +18,11 @@
                                 <a href="/profile/{{ $post->user->id }}">
                                     <span class="text-dark">{{ $post->user->username }}</span>
                                 </a>
-                                <a class="pl-3" href="#">{{ __('Follow') }}</a>
                             </div>
                         </div>
+                        @cannot('update', $post->user->profile)
+                            <follow-button user-id="{{ $post->user->id }}" follows="{{ $follows }}"></follow-button>
+                        @endcannot
                     </div>
                     <hr>
                     <p>

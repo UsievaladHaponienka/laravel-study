@@ -71,6 +71,9 @@
                                     <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
                                         {{ __('My profile') }}
                                     </a>
+                                    <a class="dropdown-item" href="/p/create">
+                                        {{ __('Add new post') }}
+                                    </a>
                                 </div>
                             </li>
                         @endguest

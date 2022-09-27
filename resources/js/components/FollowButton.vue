@@ -1,5 +1,5 @@
 <template>
-   <div> <!--All code msut be be inside one div -->
+   <div> <!--All code must be be inside one div -->
        <button class="btn btn-primary" style="margin-left: 6px" @click="followUser" v-text="buttonText"></button>
    </div>
 </template>
@@ -19,13 +19,13 @@
         },
 
         methods: {
-            followUser() {
+            followUser() {sss
                 axios.post('/follow/' + this.userId)
                     .then(response => {
                         this.status = !this.status
                     })
                     .catch(errors => {
-                        if (errors.response.status == 401) {
+                        if (errors.response.status === 401) {
                             window.location = '/login';
                         }
                     });
