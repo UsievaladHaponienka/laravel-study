@@ -54,7 +54,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <?php #Disaplay user name instead of name in header?>
+                                    {{ Auth::user()->username }} <?php #Disaplay username instead of name in header?>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -67,6 +67,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
+                                        {{ __('My profile') }}
+                                    </a>
                                 </div>
                             </li>
                         @endguest
