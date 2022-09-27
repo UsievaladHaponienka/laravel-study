@@ -56,6 +56,8 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
+    // This method has access to user as it is policy method, so User model will be received before call
+    // Profile model is passed in initial call, for example in \App\Http\Controllers\ProfilesController::edit method
     public function update(User $user, Profile $profile)
     {
         return $user->id == $profile->user->id;

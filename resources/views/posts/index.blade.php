@@ -25,7 +25,7 @@
         @endforeach
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                {{ $posts->links() }} <!-- Add pagination links if `paginate` method was called in controller. TODO debug! -->
+                {{ $posts->links() }} <!-- Add pagination links if `paginate` method was called in controller. -->
             </div>
         </div>
     </div>

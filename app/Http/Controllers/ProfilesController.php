@@ -13,6 +13,8 @@ class ProfilesController extends Controller
 {
     public function index(User $user) //If arg name is same as in route, Laravel can resolve it and find user
     {
+        // We need to call following as User class property, not method. Method returns relation,
+        // while property is collection
         $follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
 
         //Added caching
@@ -48,7 +50,9 @@ class ProfilesController extends Controller
 
     public function edit(User $user)
     {
-        $this->authorize('update', $user->profile); //TODO Debug this method
+        // In this line method \App\Policies\ProfilePolicy::update will be called
+        // Method name is passed as first argument. Class name will be determined form Profile class name
+        $this->authorize('update', $user->profile);
         return view('profile.edit', compact('user'));
     }
 

@@ -17,9 +17,9 @@ class PostsController extends Controller
     {
         $users = auth()->user()->following()->pluck('profiles.user_id'); // Get all user ids
 
-        $posts = Posts::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
         // latest equals to orderBy('created_at', 'DESC')
-        // paginate(5) not only allows to get 5 posts, but also allows to user $posts->links to create pagination at view. TODO debug!
+        // paginate(5) not only allows to get 5 posts, but also allows to user $posts->links to create pagination at view.
+        $posts = Posts::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
 
         return view('posts.index', compact('posts'));
     }
@@ -44,7 +44,7 @@ class PostsController extends Controller
         $image = Image::make(public_path("storage/" . $imagePath))->fit(1200, 1200);
         $image->save();
 
-        auth()->user()->posts()->create([         //TODO debug this method
+        auth()->user()->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
         ]);

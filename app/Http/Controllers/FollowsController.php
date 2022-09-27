@@ -15,7 +15,8 @@ class FollowsController extends Controller
     public function store(User $user)
     {
         //Assign or de-assign authenticated user to current profile
-        //TODO debug
+        //We need to call method following() here as it returns Relation object. Calling user()->following will return
+        //Profiles collection
         return auth()->user()->following()->toggle($user->profile->id);
     }
 }

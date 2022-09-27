@@ -53,9 +53,9 @@ class User extends Authenticatable
      */
     protected static function boot()
     {
-        parent::boot(); //TODO debug
+        parent::boot();
 
-        //This is event which is filed when new user is created
+        //This is event which is fired when new user is created
         static::created(
             function($user) {
                 // $user->profile() will return relation, while $user->profile returns profile object.
